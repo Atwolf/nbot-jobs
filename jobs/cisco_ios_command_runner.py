@@ -5,6 +5,7 @@ from nautobot.apps.jobs import Job, StringVar, ObjectVar, TextVar
 from nautobot.dcim.models import Device
 from netmiko import ConnectHandler # For SSH connection
 from netmiko.exceptions import NetmikoAuthenticationException, NetmikoTimeoutException
+from nautobot.apps import jobs
 
 # Define a grouping for your jobs in the UI (optional but recommended)
 name = "Device Interaction Examples"
@@ -130,3 +131,5 @@ class CiscoIOSCommandRunner(Job):
         # Setting the TextVar content makes it visible in the job results output section.
         self.data['output'] = job_output # Update the TextVar defined earlier
         return job_output # The return value is also logged
+    
+jobs.register_jobs(CiscoIOSCommandRunner)
